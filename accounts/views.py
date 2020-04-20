@@ -10,7 +10,15 @@ def home(request):
     orders = Order.objects.all()
     customers = Customer.objects.all()
 
-    context = {'orders':customers, 'customers':customers}
+    total_customers = customers.count()
+
+    delivered = orders.filter(status ='Delivered').count()
+    pending = orders.filter(status = 'Pending').count()
+
+    
+
+    total_orders = order.count()
+    context = {'orders':customers, 'customers':customers,'total_orders':total_orders, 'delivered':delivered, 'pending':pending}
     return render(request, 'accounts/dashboard.html', context)
 
 def products(request):
